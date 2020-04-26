@@ -10,15 +10,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.todolist.DAO.ProjectDao;
 import com.example.todolist.DAO.TaskDao;
+import com.example.todolist.Entity.Project;
 import com.example.todolist.Entity.Task;
 
-@Database(entities = {Task.class}, version = 1)
+@Database(entities = {Task.class, Project.class}, version = 1)
 public abstract class TodoDatabase extends RoomDatabase {
 
     private static TodoDatabase instance;
 
     public abstract TaskDao taskDao();
+    public abstract ProjectDao projectDao();
 
 
     public static synchronized TodoDatabase getInstance(Context context){
@@ -46,16 +49,21 @@ public abstract class TodoDatabase extends RoomDatabase {
 
     private static class PopulateDBAsyncTask extends AsyncTask<Void,Void,Void>{
         private TaskDao taskDao;
-
+        private ProjectDao projectDao;
 
         private PopulateDBAsyncTask(TodoDatabase db){
             this.taskDao = db.taskDao();
+            this.projectDao = db.projectDao();
         }
         @Override
         protected Void doInBackground(Void... voids) {
             taskDao.insert(new Task(-1,"Finish the App design on Adobe XD", Color.parseColor("#FF7675")));
             taskDao.insert(new Task(-1,"Add the unit testing", Color.parseColor("#74B9FF")));
             taskDao.insert(new Task(-1,"Create a GitHub repo", Color.parseColor("#55EFC4")));
+
+            projectDao.insert(new Project("CPS847 Final Project",Color.parseColor("#FF7675"),0));
+            projectDao.insert(new Project("CPS616 Assignment 1",Color.parseColor("#74B9FF"),0));
+            projectDao.insert(new Project("Android Todo List App",Color.parseColor("#55EFC4"),0));
             return null;
         }
     }
