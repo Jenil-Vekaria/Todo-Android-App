@@ -27,14 +27,17 @@
 
         <TextView
             android:id="@+id/taskDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="10"
             android:layout_marginLeft="6dp"
             android:ellipsize="end"
             android:fontFamily="@font/nunito"
             android:maxLines="1"
-            android:text="Finish the App design on Adobe XD Finish the App design on Adobe XD"
+            android:text="Finish the App design on Adobe XD "
             android:textColor="@color/colorTitle"
             android:textSize="16sp" />
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

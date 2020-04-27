@@ -27,7 +27,14 @@ public interface TaskDao {
     @Query("DELETE FROM task_table")
     void deleteAllTasks();
 
-    @Query("SELECT * FROM task_table")
+    @Query("SELECT * FROM task_table ORDER BY projectID")
     LiveData<List<Task>> getAllTasks();
+
+
+    @Query("SELECT * FROM task_table WHERE isDone = 1")
+    LiveData<List<Task>> getAllCompletedTasks();
+
+    @Query("SELECT * FROM task_table WHERE isDone = 0")
+    LiveData<List<Task>> getAllIncompletedTasks();
 
 }

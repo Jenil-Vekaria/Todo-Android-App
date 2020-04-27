@@ -1,7 +1,6 @@
 package com.example.todolist.Entity;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "task_table")
@@ -19,13 +18,24 @@ public class Task {
     private String note;
 
     private int color;
+    private String colorName;
 
     private boolean isDone = false;
 
-    public Task(int projectID, String note, int color) {
+    public Task(int projectID, String note, int color, String colorName, boolean isDone) {
         this.projectID = projectID;
         this.note = note;
         this.color = color;
+        this.colorName = colorName;
+        this.isDone = isDone;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 
     public int getTaskID() {

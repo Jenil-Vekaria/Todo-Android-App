@@ -18,7 +18,9 @@ public class TodoViewModel extends AndroidViewModel {
     private TaskRepository taskRepository;
     private ProjectRepository projectRepository;
 
+    private LiveData<List<Task>> allIncompletedTasks;
     private LiveData<List<Task>> allTasks;
+    private LiveData<List<Task>> allCompletedTasks;
     private LiveData<List<Project>> allProjects;
 
     public TodoViewModel(@NonNull Application application) {
@@ -27,6 +29,9 @@ public class TodoViewModel extends AndroidViewModel {
         projectRepository = new ProjectRepository(application);
 
         allTasks = taskRepository.getAllTasks();
+        allCompletedTasks = taskRepository.getAllCompletedTask();
+        allIncompletedTasks = taskRepository.getAllIncompletedTask();
+
         allProjects = projectRepository.getAllProjects();
     }
 
@@ -56,7 +61,10 @@ public class TodoViewModel extends AndroidViewModel {
         projectRepository.deleteAllProjects();
     }
 
+    public LiveData<List<Task>> getAllIncompletedTasks(){ return allIncompletedTasks; }
     public LiveData<List<Task>> getAllTasks(){ return allTasks; }
+    public LiveData<List<Task>> getAllCompletedTasks(){ return allCompletedTasks; }
+
     public LiveData<List<Project>> getAllProjects(){
         return allProjects;
     }

@@ -57,13 +57,13 @@ public abstract class TodoDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            taskDao.insert(new Task(-1,"Finish the App design on Adobe XD", Color.parseColor("#FF7675")));
-            taskDao.insert(new Task(-1,"Add the unit testing", Color.parseColor("#74B9FF")));
-            taskDao.insert(new Task(-1,"Create a GitHub repo", Color.parseColor("#55EFC4")));
+            taskDao.insert(new Task(-1,"Finish the App design on Adobe XD", Color.parseColor("#FF7675"),"Red",false));
+            taskDao.insert(new Task(-1,"Add the unit testing", Color.parseColor("#74B9FF"),"Green",true));
+            taskDao.insert(new Task(-1,"Create a GitHub repo", Color.parseColor("#55EFC4"),"Blue",true));
 
-            projectDao.insert(new Project("CPS847 Final Project",Color.parseColor("#FF7675"),0));
-            projectDao.insert(new Project("CPS616 Assignment 1",Color.parseColor("#74B9FF"),0));
-            projectDao.insert(new Project("Android Todo List App",Color.parseColor("#55EFC4"),0));
+            projectDao.insert(new Project("CPS847 Final Project",Color.parseColor("#FF7675"),0,"Red"));
+            projectDao.insert(new Project("CPS616 Assignment 1",Color.parseColor("#74B9FF"),0,"Default Color"));
+            projectDao.insert(new Project("Android Todo List App",Color.parseColor("#55EFC4"),0,"Green"));
             return null;
         }
     }

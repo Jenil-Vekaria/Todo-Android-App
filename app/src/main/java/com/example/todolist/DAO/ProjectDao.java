@@ -29,7 +29,7 @@ public interface ProjectDao {
     @Query("DELETE FROM project_table")
     void deleteAllProjects();
 
-    @Query("SELECT * FROM project_table")
+    @Query("SELECT * FROM project_table ORDER BY projectID DESC")
     LiveData<List<Project>> getAllProject();
 
 }

@@ -12,15 +12,25 @@ public class Project {
     private String projectName;
 
     private int projectColor;
+    private String colorName;
 
     private int totalTasks;
 
     private boolean isDone = false;
 
-    public Project(String projectName, int projectColor, int totalTasks) {
+    public Project(String projectName, int projectColor, int totalTasks, String colorName) {
         this.projectName = projectName;
         this.projectColor = projectColor;
         this.totalTasks = totalTasks;
+        this.colorName = colorName;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 
     public int getProjectID() {

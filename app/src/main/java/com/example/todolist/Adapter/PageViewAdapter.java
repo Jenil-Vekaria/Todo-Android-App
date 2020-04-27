@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.todolist.AllTasksFragment;
-import com.example.todolist.CompletedTasksFragment;
-import com.example.todolist.TasksFragment;
+import com.example.todolist.Fragment.AllTasksFragment;
+import com.example.todolist.Fragment.CompletedTasksFragment;
+import com.example.todolist.Fragment.TasksFragment;
 
 public class PageViewAdapter extends FragmentStatePagerAdapter {
 

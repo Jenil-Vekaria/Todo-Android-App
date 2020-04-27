@@ -18,13 +18,15 @@ import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
-    private List<Task> allTask = new ArrayList<Task>();
+    private List<Task> allTask = new ArrayList<>();
+
+    private OnTaskClickListener listener;
 
     @NonNull
     @Override
     public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.task_item,parent,false);
+                .inflate(R.layout.task_item, parent, false);
         return new TaskHolder(itemView);
     }
 
@@ -40,12 +42,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         return allTask.size();
     }
 
-    public void setNotes(List<Task> allTask){
+    public void setTasks(List<Task> allTask) {
         this.allTask = allTask;
         notifyDataSetChanged();
     }
 
-    class TaskHolder extends RecyclerView.ViewHolder{
+    public Task getTaskAt(int position) {
+        return allTask.get(position);
+    }
+
+    class TaskHolder extends RecyclerView.ViewHolder {
 
         private Button dot;
         private TextView taskDescription;
@@ -54,7 +60,27 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             super(itemView);
             dot = itemView.findViewById(R.id.dot);
             taskDescription = itemView.findViewById(R.id.taskDescription);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    if (listener != null && position != RecyclerView.NO_POSITION)
+                        listener.onTaskClick(allTask.get(position));
+                }
+            });
+
         }
+    }
+
+    public interface OnTaskClickListener {
+        void onTaskClick(Task task);
+    }
+
+    public void setOnItemClickListener(OnTaskClickListener listener) {
+        this.listener = listener;
     }
 
 }

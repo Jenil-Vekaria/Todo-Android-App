@@ -13,12 +13,16 @@ import java.util.List;
 
 public class TaskRepository {
     private TaskDao taskDao;
+    private LiveData<List<Task>> allIncompletedTask;
     private LiveData<List<Task>> allTasks;
+    private LiveData<List<Task>> allCompletedTask;
 
     public TaskRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         taskDao = database.taskDao();
         allTasks = taskDao.getAllTasks();
+        allCompletedTask = taskDao.getAllCompletedTasks();
+        allIncompletedTask = taskDao.getAllIncompletedTasks();
     }
 
     public void insert(Task task){
@@ -37,9 +41,11 @@ public class TaskRepository {
         new DeleteAllTaskAsyncTask(taskDao).execute();
     }
 
+    public LiveData<List<Task>> getAllIncompletedTask() { return allIncompletedTask;}
     public LiveData<List<Task>> getAllTasks(){
         return allTasks;
     }
+    public LiveData<List<Task>> getAllCompletedTask() { return allCompletedTask;}
 
 
     private static class InsertTaskAsyncTask extends AsyncTask<Task,Void,Void>{

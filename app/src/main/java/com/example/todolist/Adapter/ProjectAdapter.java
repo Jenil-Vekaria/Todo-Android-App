@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectHolder> {
 
-    private List<Project> allProjects = new ArrayList<Project>();
+    private List<Project> allProjects = new ArrayList<>();
 
     @NonNull
     @Override
@@ -45,6 +45,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
 
     public void setProject(List<Project> allProjects){
         this.allProjects = allProjects;
+        notifyDataSetChanged();
     }
 
     public class ProjectHolder extends RecyclerView.ViewHolder{

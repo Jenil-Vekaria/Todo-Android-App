@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,10 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Projects"
         android:fontFamily="@font/nunito_semibold"
+        android:text="Projects"
         android:textColor="@color/colorTitle"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProjects"
@@ -27,15 +26,63 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         tools:listitem="@layout/project_item" />
-    
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabLayout"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewPager"/>
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"/>
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/floatingActionMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            app:menu_colorNormal="@color/blue"
+            app:menu_colorPressed="@color/blue"
+            app:menu_colorRipple="@color/blue"
+            app:menu_backgroundColor="@android:color/transparent"
+            app:menu_fab_label=""
+            app:menu_openDirection="up"
+            app:menu_animationDelayPerItem="55"
+            android:clickable="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/button_add_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_task"
+                app:fab_label="Add Task"
+                app:fab_size="mini"
+                app:fab_colorNormal="@color/red"
+                app:fab_colorPressed="@color/red"
+                app:fab_colorRipple="@color/red"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/button_add_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_label="Add Project"
+                android:src="@drawable/ic_project"
+                app:fab_size="mini"
+                app:fab_colorNormal="@color/yellow"
+                app:fab_colorPressed="@color/yellow"
+                app:fab_colorRipple="@color/yellow"/>
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+
 
 </LinearLayout>
