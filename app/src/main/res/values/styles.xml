@@ -16,5 +16,8 @@
         <item name="android:textSize">25dp</item>
     </style>
 
-
+    <style name="TabLayout" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+    </style>
 </resources>

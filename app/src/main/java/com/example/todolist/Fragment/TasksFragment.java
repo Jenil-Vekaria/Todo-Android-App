@@ -19,6 +19,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.todolist.Adapter.TaskAdapter;
@@ -47,6 +48,8 @@ public class TasksFragment extends Fragment {
 
     private int projectID;
 
+    private LinearLayout noTaskDisplay;
+
     public TasksFragment(int projectIDViewMode){
         this.projectID = projectIDViewMode;
     }
@@ -60,10 +63,19 @@ public class TasksFragment extends Fragment {
         todoViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(TodoViewModel.class);
 
+        noTaskDisplay = view.findViewById(R.id.no_tasks);
+
         displayDailyTasks(view);
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void displayNoTaskMessage(boolean display){
+        if(display)
+            noTaskDisplay.setVisibility(LinearLayout.VISIBLE);
+        else
+            noTaskDisplay.setVisibility(LinearLayout.INVISIBLE);
     }
 
 
@@ -82,6 +94,12 @@ public class TasksFragment extends Fragment {
             public void onChanged(List<Task> tasks) {
                 //Update the RecyclerView here
                 adapter.setTasks(tasks);
+
+                if(adapter.getItemCount() > 0)
+                    displayNoTaskMessage(false);
+                else
+                    displayNoTaskMessage(true);
+
             }
         });
 

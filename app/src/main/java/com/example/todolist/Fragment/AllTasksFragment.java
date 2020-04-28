@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.todolist.Adapter.TaskAdapter;
@@ -44,6 +45,7 @@ public class AllTasksFragment extends Fragment {
 
     private Task removedTask;
 
+    private LinearLayout noTaskDisplay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,10 +54,19 @@ public class AllTasksFragment extends Fragment {
         todoViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(TodoViewModel.class);
 
+        noTaskDisplay = view.findViewById(R.id.no_tasks);
+
         displayAllTasks(view);
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void displayNoTaskMessage(boolean display){
+        if(display)
+            noTaskDisplay.setVisibility(LinearLayout.VISIBLE);
+        else
+            noTaskDisplay.setVisibility(LinearLayout.INVISIBLE);
     }
 
     private void displayAllTasks(final View view){
@@ -75,6 +86,12 @@ public class AllTasksFragment extends Fragment {
             @Override
             public void onChanged(List<Task> tasks) {
                 adapter.setTasks(tasks);
+
+                if(adapter.getItemCount() > 0)
+                    displayNoTaskMessage(false);
+                else
+                    displayNoTaskMessage(true);
+
             }
         });
 

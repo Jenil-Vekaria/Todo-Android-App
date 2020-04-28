@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.todolist.Adapter.TaskAdapter;
@@ -45,6 +46,9 @@ public class CompletedTasksFragment extends Fragment {
 
     private int projectID;
 
+    private LinearLayout noTaskDisplay;
+
+
     public CompletedTasksFragment(int projectIDViewMode){
         this.projectID = projectIDViewMode;
     }
@@ -59,9 +63,19 @@ public class CompletedTasksFragment extends Fragment {
         todoViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication())).get(TodoViewModel.class);
 
+        noTaskDisplay = view.findViewById(R.id.no_tasks);
+
+
         displayCompletedTasks(view);
 
         return view;
+    }
+
+    public void displayNoTaskMessage(boolean display){
+        if(display)
+            noTaskDisplay.setVisibility(LinearLayout.VISIBLE);
+        else
+            noTaskDisplay.setVisibility(LinearLayout.INVISIBLE);
     }
 
     private void displayCompletedTasks(final View view) {
@@ -72,7 +86,7 @@ public class CompletedTasksFragment extends Fragment {
 
 //      Get the displaying task adapter
         final TaskAdapter adapter = new TaskAdapter(projectID);
-//      Attach the adapter to recylerview
+//      Attach the adapter to recyclerview
         completedTaskRecylerView.setAdapter(adapter);
 
 //      This is so live displaying
@@ -80,6 +94,11 @@ public class CompletedTasksFragment extends Fragment {
             @Override
             public void onChanged(List<Task> tasks) {
                 adapter.setTasks(tasks);
+
+                if(adapter.getItemCount() > 0)
+                    displayNoTaskMessage(false);
+                else
+                    displayNoTaskMessage(true);
             }
         });
 

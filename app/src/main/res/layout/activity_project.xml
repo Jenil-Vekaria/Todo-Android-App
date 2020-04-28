@@ -37,7 +37,7 @@
             android:id="@+id/button_add_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_task"
+            android:src="@drawable/ic_notebook"
             app:fab_label="Add Task"
             app:fab_size="mini"
             app:fab_colorNormal="@color/red"
