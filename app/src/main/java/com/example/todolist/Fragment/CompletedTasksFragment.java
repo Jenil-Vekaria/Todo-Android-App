@@ -112,7 +112,7 @@ public class CompletedTasksFragment extends Fragment {
                 intent.putExtra(AddTaskActivity.EXTRA_ID, task.getTaskID());
                 intent.putExtra(AddTaskActivity.EXTRA_TASK, task.getNote());
                 intent.putExtra(AddTaskActivity.EXTRA_COLOR, task.getColor());
-                intent.putExtra(AddTaskActivity.EXTRA_PROJECT, task.getProjectID());
+                intent.putExtra(AddTaskActivity.EXTRA_PROJECTID, task.getProjectID());
                 intent.putExtra(AddTaskActivity.EXTRA_COLOR_NAME,task.getColorName());
                 startActivityForResult(intent, EDIT_TASK_REQUEST);
             }
@@ -134,11 +134,11 @@ public class CompletedTasksFragment extends Fragment {
             }
 
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            String project = data.getStringExtra(AddTaskActivity.EXTRA_PROJECT);
+            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
-            Task newTask = new Task(-1, task, color,colorName,true);
+            Task newTask = new Task(projectID, task, color,colorName,true);
             newTask.setTaskID(id);
             todoViewModel.update(newTask);
 

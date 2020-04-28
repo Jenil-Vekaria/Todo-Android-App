@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
@@ -57,7 +60,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 menu.close(true);
+
                 Intent intent = new Intent(MainActivity.this,AddTaskActivity.class);
+
                 startActivityForResult(intent,ADD_TASK_REQUEST);
             }
         });
@@ -79,11 +84,11 @@ public class MainActivity extends AppCompatActivity{
 
         if(requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK){
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            String project = data.getStringExtra(AddTaskActivity.EXTRA_PROJECT);
+            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
-            Task newTask = new Task(-1,task,color,colorName,false);
+            Task newTask = new Task(projectID,task,color,colorName,false);
             todoViewModel.insert(newTask);
 
             Toast.makeText(this,"Task saved",Toast.LENGTH_SHORT).show();

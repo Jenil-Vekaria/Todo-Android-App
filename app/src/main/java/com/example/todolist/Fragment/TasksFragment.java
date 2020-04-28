@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,13 @@ import android.widget.Toast;
 
 import com.example.todolist.Adapter.TaskAdapter;
 import com.example.todolist.AddTaskActivity;
+import com.example.todolist.Entity.Project;
 import com.example.todolist.Entity.Task;
 import com.example.todolist.R;
 import com.example.todolist.ViewModel.TodoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -39,6 +42,8 @@ public class TasksFragment extends Fragment {
     private TodoViewModel todoViewModel;
 
     private Task removedTask;
+
+    private List<Project> allProjects;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +75,13 @@ public class TasksFragment extends Fragment {
             public void onChanged(List<Task> tasks) {
                 //Update the RecyclerView here
                 adapter.setTasks(tasks);
+            }
+        });
+
+        todoViewModel.getAllProjects().observe(this, new Observer<List<Project>>() {
+            @Override
+            public void onChanged(List<Project> projects) {
+                allProjects = projects;
             }
         });
 
@@ -111,12 +123,17 @@ public class TasksFragment extends Fragment {
             @Override
             public void onTaskClick(Task task) {
 
+                Bundle data = new Bundle();
+
+                data.putParcelableArrayList("ALL_PROJECTS", (ArrayList<? extends Parcelable>) allProjects);
+
                 Intent intent = new Intent(getContext(), AddTaskActivity.class);
                 intent.putExtra(AddTaskActivity.EXTRA_ID, task.getTaskID());
                 intent.putExtra(AddTaskActivity.EXTRA_TASK, task.getNote());
                 intent.putExtra(AddTaskActivity.EXTRA_COLOR, task.getColor());
-                intent.putExtra(AddTaskActivity.EXTRA_PROJECT, task.getProjectID());
+                intent.putExtra(AddTaskActivity.EXTRA_PROJECTID, task.getProjectID());
                 intent.putExtra(AddTaskActivity.EXTRA_COLOR_NAME,task.getColorName());
+                intent.putExtras(data);
                 startActivityForResult(intent, EDIT_TASK_REQUEST);
             }
         });
@@ -135,11 +152,11 @@ public class TasksFragment extends Fragment {
             }
 
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            String project = data.getStringExtra(AddTaskActivity.EXTRA_PROJECT);
+            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
-            Task newTask = new Task(-1, task, color,colorName,false);
+            Task newTask = new Task(projectID, task, color,colorName,false);
             newTask.setTaskID(id);
             todoViewModel.update(newTask);
 

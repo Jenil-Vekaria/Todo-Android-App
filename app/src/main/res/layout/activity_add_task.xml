@@ -35,18 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/taskDescription"
         app:srcCompat="@drawable/ic_project" />
 
-    <TextView
-        android:id="@+id/selectProject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/nunito_light"
-        android:text="Select Project"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/projectIcon"
-        app:layout_constraintStart_toEndOf="@+id/projectIcon"
-        app:layout_constraintTop_toTopOf="@+id/projectIcon" />
-
     <Button
         android:id="@+id/dot"
         android:layout_width="13dp"
@@ -62,11 +50,12 @@
         android:id="@+id/selectColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
         android:fontFamily="@font/nunito_light"
         android:text="Default Color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/dot"
-        app:layout_constraintStart_toStartOf="@+id/selectProject"
+        app:layout_constraintStart_toEndOf="@+id/dot"
         app:layout_constraintTop_toTopOf="@+id/dot" />
 
     <Button
@@ -83,4 +72,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectColor" />
+
+    <Spinner
+        android:id="@+id/selectProject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/projectIcon"
+        app:layout_constraintStart_toEndOf="@+id/projectIcon"
+        app:layout_constraintTop_toTopOf="@+id/projectIcon"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
