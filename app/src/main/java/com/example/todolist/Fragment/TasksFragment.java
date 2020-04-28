@@ -45,6 +45,13 @@ public class TasksFragment extends Fragment {
 
     private List<Project> allProjects;
 
+    private int projectID;
+
+    public TasksFragment(int projectIDViewMode){
+        this.projectID = projectIDViewMode;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,7 +74,7 @@ public class TasksFragment extends Fragment {
         recyclerViewTask.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewTask.setHasFixedSize(true);
 
-        final TaskAdapter adapter = new TaskAdapter();
+        final TaskAdapter adapter = new TaskAdapter(projectID);
         recyclerViewTask.setAdapter(adapter);
 
         todoViewModel.getAllIncompletedTasks().observe(this, new Observer<List<Task>>() {

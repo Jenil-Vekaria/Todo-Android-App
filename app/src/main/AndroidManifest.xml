@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ProjectActivity"
+            android:parentActivityName=".MainActivity" ></activity>
         <activity
             android:name=".AddProjectActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddTaskActivity"
             android:parentActivityName=".MainActivity" />

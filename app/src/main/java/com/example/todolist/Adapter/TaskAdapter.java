@@ -22,6 +22,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
     private OnTaskClickListener listener;
 
+    private int projectID;
+
+    public TaskAdapter(int projectID) {
+        this.projectID = projectID;
+    }
+
     @NonNull
     @Override
     public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,6 +41,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         Task currentTask = allTask.get(position);
         holder.taskDescription.setText(currentTask.getNote());
         holder.dot.setBackgroundTintList(ColorStateList.valueOf(currentTask.getColor()));
+
+//        if(projectID == -1){
+//            holder.taskDescription.setText(currentTask.getNote());
+//            holder.dot.setBackgroundTintList(ColorStateList.valueOf(currentTask.getColor()));
+//        }
     }
 
     @Override
@@ -43,7 +54,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
     }
 
     public void setTasks(List<Task> allTask) {
-        this.allTask = allTask;
+        List<Task> list = new ArrayList<>();
+        for (Task t : allTask) {
+            if (t.getProjectID() == projectID)
+                list.add(t);
+        }
+        this.allTask = list;
         notifyDataSetChanged();
     }
 

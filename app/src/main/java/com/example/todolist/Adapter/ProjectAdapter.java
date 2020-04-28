@@ -20,6 +20,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
 
     private List<Project> allProjects = new ArrayList<>();
 
+    private OnProjectClickListener listener;
+
     @NonNull
     @Override
     public ProjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,6 +62,25 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
             projectCard = itemView.findViewById(R.id.projectCard);
             projectName = itemView.findViewById(R.id.projectName);
             totalTasks = itemView.findViewById(R.id.totalTasks);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onProjectClick(allProjects.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnProjectClickListener{
+        void onProjectClick(Project project);
+    }
+
+    public void setOnProjectClickListener(OnProjectClickListener listener){
+        this.listener = listener;
     }
 }

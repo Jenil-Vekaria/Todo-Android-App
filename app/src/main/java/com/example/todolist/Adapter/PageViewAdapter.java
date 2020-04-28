@@ -12,10 +12,12 @@ import com.example.todolist.Fragment.TasksFragment;
 public class PageViewAdapter extends FragmentStatePagerAdapter {
 
     private int tabCount;
+    private int projectID;
 
-    public PageViewAdapter(FragmentManager fragmentManager, int tabCount){
+    public PageViewAdapter(FragmentManager fragmentManager, int tabCount, int projectID){
         super(fragmentManager);
         this.tabCount = tabCount;
+        this.projectID = projectID;
     }
 
     @NonNull
@@ -24,9 +26,9 @@ public class PageViewAdapter extends FragmentStatePagerAdapter {
 
         switch (position){
             case 0:
-                return new TasksFragment();
+                return new TasksFragment(projectID);
             case 1:
-                return new CompletedTasksFragment();
+                return new CompletedTasksFragment(projectID);
             case 2:
                 return new AllTasksFragment();
             default:

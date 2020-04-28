@@ -27,14 +27,21 @@ public interface TaskDao {
     @Query("DELETE FROM task_table")
     void deleteAllTasks();
 
-    @Query("SELECT * FROM task_table ORDER BY projectID")
+    @Query("SELECT * FROM task_table ORDER BY taskID DESC")
     LiveData<List<Task>> getAllTasks();
 
+    @Query("SELECT * FROM task_table WHERE projectID = :projectID ORDER BY taskID DESC")
+    LiveData<List<Task>> getAllProjectTasks(int projectID);
 
-    @Query("SELECT * FROM task_table WHERE isDone = 1")
+
+    @Query("SELECT * FROM task_table WHERE isDone = 1 ORDER BY taskID DESC")
     LiveData<List<Task>> getAllCompletedTasks();
 
-    @Query("SELECT * FROM task_table WHERE isDone = 0")
+    @Query("SELECT * FROM task_table WHERE isDone = 1 AND projectID = :projectID ORDER BY taskID DESC")
+    LiveData<List<Task>> getAllProjectCompletedTasks(int projectID);
+
+
+    @Query("SELECT * FROM task_table WHERE isDone = 0 ORDER BY taskID DESC")
     LiveData<List<Task>> getAllIncompletedTasks();
 
 }

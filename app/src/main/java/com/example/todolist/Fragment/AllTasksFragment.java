@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,13 @@ import android.widget.Toast;
 
 import com.example.todolist.Adapter.TaskAdapter;
 import com.example.todolist.AddTaskActivity;
+import com.example.todolist.Entity.Project;
 import com.example.todolist.Entity.Task;
 import com.example.todolist.R;
 import com.example.todolist.ViewModel.TodoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -36,6 +39,8 @@ public class AllTasksFragment extends Fragment {
 
     private RecyclerView allTasksRecyclerView;
     private TodoViewModel todoViewModel;
+
+    private List<Project> allProjects;
 
     private Task removedTask;
 
@@ -61,7 +66,7 @@ public class AllTasksFragment extends Fragment {
         allTasksRecyclerView.setHasFixedSize(true);
 
 //      Task Adapter
-        final TaskAdapter adapter = new TaskAdapter();
+        final TaskAdapter adapter = new TaskAdapter(-1);
 //      Attack adapter to RecyclerView
         allTasksRecyclerView.setAdapter(adapter);
 
@@ -72,6 +77,14 @@ public class AllTasksFragment extends Fragment {
                 adapter.setTasks(tasks);
             }
         });
+
+        todoViewModel.getAllProjects().observe(this, new Observer<List<Project>>() {
+            @Override
+            public void onChanged(List<Project> projects) {
+                allProjects = projects;
+            }
+        });
+
 
 
 //      Swiping operation
@@ -100,6 +113,9 @@ public class AllTasksFragment extends Fragment {
         adapter.setOnItemClickListener(new TaskAdapter.OnTaskClickListener() {
             @Override
             public void onTaskClick(Task task) {
+                Bundle data = new Bundle();
+
+                data.putParcelableArrayList("ALL_PROJECTS", (ArrayList<? extends Parcelable>) allProjects);
 
                 Intent intent = new Intent(getContext(), AddTaskActivity.class);
                 intent.putExtra(AddTaskActivity.EXTRA_ID, task.getTaskID());
@@ -108,6 +124,7 @@ public class AllTasksFragment extends Fragment {
                 intent.putExtra(AddTaskActivity.EXTRA_PROJECTID, task.getProjectID());
                 intent.putExtra(AddTaskActivity.EXTRA_COLOR_NAME,task.getColorName());
                 intent.putExtra(AddTaskActivity.EXTRA_IS_DONE,task.isDone());
+                intent.putExtras(data);
                 startActivityForResult(intent, EDIT_TASK_REQUEST);
             }
         });

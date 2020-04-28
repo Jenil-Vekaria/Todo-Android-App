@@ -17,12 +17,17 @@ public class TaskRepository {
     private LiveData<List<Task>> allTasks;
     private LiveData<List<Task>> allCompletedTask;
 
+    private LiveData<List<Task>> allProjectTasks;
+    private LiveData<List<Task>> allProjectCompletedTask;
+
     public TaskRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         taskDao = database.taskDao();
+
         allTasks = taskDao.getAllTasks();
         allCompletedTask = taskDao.getAllCompletedTasks();
         allIncompletedTask = taskDao.getAllIncompletedTasks();
+
     }
 
     public void insert(Task task){

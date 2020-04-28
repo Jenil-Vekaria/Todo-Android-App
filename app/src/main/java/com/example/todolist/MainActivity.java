@@ -24,7 +24,6 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +31,13 @@ public class MainActivity extends AppCompatActivity{
 
     public final static int ADD_TASK_REQUEST = 1;
     public final static int ADD_PROJECT_REQUEST = 3;
+    public static final int PROJECT_EDIT_REQUEST = 4;
 
     private TodoViewModel todoViewModel;
     FloatingActionMenu menu;
+
+    private List<Project> allProjects;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +64,11 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 menu.close(true);
 
+                Bundle data = new Bundle();
+                data.putParcelableArrayList("ALL_PROJECTS", (ArrayList<? extends Parcelable>) allProjects);
+
                 Intent intent = new Intent(MainActivity.this,AddTaskActivity.class);
+                intent.putExtras(data);
 
                 startActivityForResult(intent,ADD_TASK_REQUEST);
             }
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity{
             todoViewModel.insert(newProject);
             Toast.makeText(this,"Project saved",Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void displayProjects() {
@@ -118,9 +126,23 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onChanged(List<Project> projects) {
                 projectAdapter.setProject(projects);
-                Toast.makeText(MainActivity.this,"Change Observed",Toast.LENGTH_SHORT).show();
+                allProjects = projects;
             }
         });
+
+        projectAdapter.setOnProjectClickListener(new ProjectAdapter.OnProjectClickListener() {
+            @Override
+            public void onProjectClick(Project project) {
+
+                Bundle data = new Bundle();
+                data.putParcelable("PROJECT",project);
+
+                Intent intent = new Intent(MainActivity.this,ProjectActivity.class);
+                intent.putExtras(data);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void displayDailyTask(){
@@ -131,7 +153,7 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.viewPager);
-        final PageViewAdapter pageViewAdapter = new PageViewAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final PageViewAdapter pageViewAdapter = new PageViewAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),-1);
 
         viewPager.setAdapter(pageViewAdapter);
 

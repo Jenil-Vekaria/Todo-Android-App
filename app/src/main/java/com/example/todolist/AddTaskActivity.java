@@ -40,6 +40,7 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
     private int dotColor;
     private String colorName;
     private int selectedProjectID;
+    private int currentProjectSelectionIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
 
         } else {
             setTitle("Add Task");
-            selectedProjectID = -1;
+            selectedProjectID = intent.getIntExtra("SELECT_PROJECTID",-1);
         }
 
         listener();
@@ -104,24 +105,22 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
 
     public void displayProjectList() {
 
-        Bundle data = getIntent().getExtras();
-
-        final List<Project> allProjects = data.getParcelableArrayList("ALL_PROJECTS");
-
         List<String> list = new ArrayList<>();
         list.add("Select Project");
 
-        int projectIndex = 0;
+        Bundle data = getIntent().getExtras();
 
-        if (allProjects != null) {
+        assert data != null;
+        final List<Project> allProjects = data.getParcelableArrayList("ALL_PROJECTS");
 
+        if(data != null){
             for (int i = 0; i < allProjects.size(); i++) {
 
                 Project project = allProjects.get(i);
                 list.add(project.getProjectName());
 
                 if(project.getProjectID() == selectedProjectID){
-                    projectIndex = i+1;
+                    currentProjectSelectionIndex = i+1;
                 }
 
                 Log.d("MainActivity","ProjectID: " + project.getProjectID() + " SelectedID: " + selectedProjectID + "\n");
@@ -130,30 +129,32 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
         }
 
 
+
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner, list);
         selectProject.setAdapter(adapter);
+        final List<Project> finalAllProjects = allProjects;
         selectProject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position > 0)
-                    selectedProjectID = allProjects.get(position - 1).getProjectID();
+                if(position > 0 && allProjects != null)
+                    selectedProjectID = allProjects.get(position-1).getProjectID();
                 else
                     selectedProjectID = -1;
-
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
 
+
+
         /* This is for edit mode
            Set the select project to the Project Name
         * */
-        selectProject.setSelection(projectIndex);
+        selectProject.setSelection(currentProjectSelectionIndex);
     }
 
 

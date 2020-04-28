@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,12 +36,26 @@ public class AddProjectActivity extends AppCompatActivity implements ColorPicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_project);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-
-        setTitle("Add Project");
 
         initComponents();
         listener();
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra(EXTRA_ID)){
+            projectDescription.setText(intent.getStringExtra(EXTRA_NAME));
+            selectColor.setText(intent.getStringExtra(EXTRA_COLOR_NAME));
+            dotColor.setBackgroundTintList(ColorStateList.valueOf(intent.getIntExtra(EXTRA_COLOR,-1)));
+
+            colorCode = intent.getIntExtra(EXTRA_COLOR,-1);
+            colorName = intent.getStringExtra(EXTRA_COLOR_NAME);
+            setTitle("Edit Project");
+        }else{
+            setTitle("Add Project");
+        }
     }
 
     public void initComponents(){
@@ -85,6 +100,10 @@ public class AddProjectActivity extends AppCompatActivity implements ColorPicker
         data.putExtra(EXTRA_COLOR,colorCode);
         data.putExtra(EXTRA_COLOR_NAME,colorName);
 
+        int id = getIntent().getIntExtra(EXTRA_ID,-1);
+        if(id != -1)
+            data.putExtra(EXTRA_ID,id);
+
         setResult(RESULT_OK,data);
         finish();
 
@@ -99,4 +118,16 @@ public class AddProjectActivity extends AppCompatActivity implements ColorPicker
         selectColor.setText(colorName);
         dotColor.setBackgroundTintList(ColorStateList.valueOf(chosenColor));
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()){
+//            case android.R.id.home:
+//                finish();
+//                return true;
+//            default:
+//                return false;
+//        }
+//    }
 }
