@@ -35,7 +35,7 @@
             android:fontFamily="@font/nunito"
             android:maxLines="1"
             android:text="Finish the App design on Adobe XD "
-            android:textColor="@color/colorTitle"
+            android:textColor="@color/cityLights"
             android:textSize="16sp" />
 
 

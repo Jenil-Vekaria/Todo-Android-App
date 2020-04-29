@@ -16,7 +16,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_semibold"
         android:text="Projects"
-        android:textColor="@color/colorTitle"
+        android:textColor="@color/cityLights"
         android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView

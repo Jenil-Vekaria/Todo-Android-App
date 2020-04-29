@@ -1,23 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FFFF</item>
-        <item name="colorPrimaryDark">#FFFF</item>
-        <item name="colorAccent">@color/greenDarnerTail</item>
-        <item name="android:windowLightStatusBar">true</item>
+<!--        <item name="colorPrimary">#FFFF</item>-->
+<!--        <item name="colorPrimaryDark">#FFFF</item>-->
+<!--        <item name="colorAccent">@color/greenDarnerTail</item>-->
+<!--        <item name="android:windowLightStatusBar">true</item>-->
+
+<!--        <item name="android:background">#3A3A3A</item>-->
     </style>
     
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
         
-        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textColor">@color/cityLights</item>
         <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">25dp</item>
     </style>
 
     <style name="TabLayout" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textColor">@color/cityLights</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
     </style>
 </resources>

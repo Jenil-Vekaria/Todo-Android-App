@@ -22,6 +22,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/cityLights"
             app:srcCompat="@drawable/ic_no_task" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_gravity="center_horizontal"
             android:text="No Tasks"
             android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/cityLights"
             android:textSize="18sp"
             />
     </LinearLayout>

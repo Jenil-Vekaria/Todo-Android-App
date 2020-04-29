@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Created by Jenil Vekaria"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <ImageView
+            android:id="@+id/github"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_github"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="User: Jenil-Vekaria"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15sp"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <TextView
+            android:id="@+id/projectLink"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/projectLink"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15sp"
+            android:fontFamily="@font/nunito_semibold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="© Copyright 2020 Jenil Vekaria. All Rights Reserved."
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="10sp"
+            android:fontFamily="@font/nunito_semibold"/>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

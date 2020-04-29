@@ -62,11 +62,9 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
             colorName = intent.getStringExtra(EXTRA_COLOR_NAME);
 
             selectedProjectID = intent.getIntExtra(EXTRA_PROJECTID, -1);
-            Toast.makeText(AddTaskActivity.this, "SelectedID: " + selectedProjectID, Toast.LENGTH_SHORT).show();
 
         } else {
             setTitle("Add Task");
-            selectedProjectID = intent.getIntExtra("SELECT_PROJECTID",-1);
         }
 
         listener();
@@ -123,7 +121,6 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
                     currentProjectSelectionIndex = i+1;
                 }
 
-                Log.d("MainActivity","ProjectID: " + project.getProjectID() + " SelectedID: " + selectedProjectID + "\n");
 
             }
         }

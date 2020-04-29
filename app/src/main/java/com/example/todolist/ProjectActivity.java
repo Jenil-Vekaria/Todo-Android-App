@@ -141,11 +141,9 @@ public class ProjectActivity extends AppCompatActivity {
 
             case R.id.edit_project:
                 editProject();
-                Toast.makeText(this,"EDIT PROJECT",Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.delete_project:
                 deleteProject();
-                Toast.makeText(this,"DELETE PROJECT",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;

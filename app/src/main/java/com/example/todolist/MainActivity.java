@@ -12,11 +12,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.method.LinkMovementMethod;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.todolist.Adapter.PageViewAdapter;
 import com.example.todolist.Adapter.ProjectAdapter;
+import com.example.todolist.Dialogs.MyInfo;
 import com.example.todolist.Entity.Project;
 import com.example.todolist.Entity.Task;
 import com.example.todolist.ViewModel.TodoViewModel;
@@ -197,4 +203,30 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.github_info_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.more_info:
+                showMyInfo();
+                return true;
+            default:
+                return false;
+        }
+
+    }
+
+    private void showMyInfo() {
+
+        MyInfo myInfoDialog = new MyInfo();
+        myInfoDialog.show(getSupportFragmentManager(),"My Info");
+
+    }
 }

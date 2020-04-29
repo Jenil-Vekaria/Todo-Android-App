@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -58,8 +60,9 @@ public class ColorPicker extends AppCompatDialogFragment {
             btn.setText(colorName[i]);
             btn.setPadding(15,10,0,0);
             btn.setTextSize(15);
-            btn.setTextColor(getResources().getColor(R.color.colorTitle));
-            btn.setTypeface(getResources().getFont(R.font.myfont));
+            btn.setTextColor(getResources().getColor(R.color.cityLights));
+//            btn.setTypeface(getResources().getFont(R.font.myfont));
+//            btn.setBackgroundTintList(ColorStateList.valueOf(colorCode[i]));
             btn.setButtonTintList(ColorStateList.valueOf(colorCode[i]));
             colorOptionGroup.addView(btn);
         }

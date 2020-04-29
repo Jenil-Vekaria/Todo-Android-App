@@ -19,7 +19,7 @@
         android:hint="Write Task Here"
         android:inputType="textMultiLine|textNoSuggestions"
         android:scrollbars="vertical"
-        android:textColor="@color/colorTitle"
+        android:textColor="@color/cityLights"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -33,7 +33,7 @@
         android:layout_marginTop="128dp"
         app:layout_constraintStart_toStartOf="@+id/taskDescription"
         app:layout_constraintTop_toBottomOf="@+id/taskDescription"
-        app:srcCompat="@drawable/ic_project" />
+        app:srcCompat="@drawable/ic_project_light" />
 
     <Button
         android:id="@+id/dot"
@@ -68,6 +68,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="Save"
+        android:fontFamily="@font/nunito_semibold"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

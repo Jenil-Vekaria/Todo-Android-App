@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="No Tasks"
+            android:textColor="@color/cityLights"
             android:fontFamily="@font/nunito_semibold"
             android:textSize="18sp"
             />

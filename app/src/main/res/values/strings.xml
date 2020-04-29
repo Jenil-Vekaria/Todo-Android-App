@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Productivity</string>
-
+    <string name="projectLink">
+        <a href="https://github.com/Jenil-Vekaria/Todo-Android-App">Repo: Todo-Android-App</a>
+    </string>
 </resources>
