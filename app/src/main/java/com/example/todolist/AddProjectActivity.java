@@ -64,7 +64,7 @@ public class AddProjectActivity extends AppCompatActivity implements ColorPicker
         save = findViewById(R.id.button_save);
         dotColor = findViewById(R.id.dot);
 
-        colorCode = getResources().getColor(R.color.blue);
+        colorCode = getResources().getColor(R.color.greenDarnerTail);
         colorName = "Default Color";
     }
 

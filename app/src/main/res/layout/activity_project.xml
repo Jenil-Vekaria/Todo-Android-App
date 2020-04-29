@@ -24,9 +24,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        app:menu_colorNormal="@color/blue"
-        app:menu_colorPressed="@color/blue"
-        app:menu_colorRipple="@color/blue"
+        app:menu_colorNormal="@color/greenDarnerTail"
+        app:menu_colorPressed="@color/greenDarnerTail"
+        app:menu_colorRipple="@color/greenDarnerTail"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_fab_label=""
         app:menu_openDirection="up"
@@ -37,12 +37,12 @@
             android:id="@+id/button_add_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_notebook"
+            android:src="@drawable/ic_task"
             app:fab_label="Add Task"
             app:fab_size="mini"
-            app:fab_colorNormal="@color/red"
-            app:fab_colorPressed="@color/red"
-            app:fab_colorRipple="@color/red"/>
+            app:fab_colorNormal="@color/pinkGlamour"
+            app:fab_colorPressed="@color/pinkGlamour"
+            app:fab_colorRipple="@color/pinkGlamour"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

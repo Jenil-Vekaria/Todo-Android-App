@@ -162,6 +162,16 @@ public class CompletedTasksFragment extends Fragment {
 
     }
 
+    private void updateProjectTaskCount(int projectID, int count){
+        for(Project p: allProjects){
+            if(p.getProjectID() == projectID){
+                p.setTotalTasks(count);
+                todoViewModel.update(p);
+                break;
+            }
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -176,13 +186,21 @@ public class CompletedTasksFragment extends Fragment {
             }
 
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
+            final int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
             Task newTask = new Task(projectID, task, color,colorName,true);
             newTask.setTaskID(id);
             todoViewModel.update(newTask);
+
+//          If task added to project, update project totalTask count
+            todoViewModel.getAllProjectTaskCount(projectID).observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer integer) {
+                    updateProjectTaskCount(projectID,integer.intValue());
+                }
+            });
 
             Toast.makeText(getContext(), "Task updated", Toast.LENGTH_SHORT).show();
 

@@ -61,6 +61,8 @@ public class TodoViewModel extends AndroidViewModel {
         projectRepository.deleteAllProjects();
     }
 
+    public LiveData<Integer> getAllProjectTaskCount(int projectId) { return taskRepository.getAllProjectTasksCount(projectId); }
+
     public LiveData<List<Task>> getAllIncompletedTasks(){ return allIncompletedTasks; }
     public LiveData<List<Task>> getAllTasks(){ return allTasks; }
     public LiveData<List<Task>> getAllCompletedTasks(){ return allCompletedTasks; }
@@ -68,4 +70,6 @@ public class TodoViewModel extends AndroidViewModel {
     public LiveData<List<Project>> getAllProjects(){
         return allProjects;
     }
+
+    public LiveData<Project> getProjectById(int projectID) { return projectRepository.getProjectById(projectID); }
 }

@@ -22,6 +22,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
 
     private OnProjectClickListener listener;
 
+
     @NonNull
     @Override
     public ProjectHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,6 +50,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectH
         this.allProjects = allProjects;
         notifyDataSetChanged();
     }
+
 
     public class ProjectHolder extends RecyclerView.ViewHolder{
 

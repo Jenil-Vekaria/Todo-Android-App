@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="colorCode">
+        <item>@color/fuelTown</item>
+        <item>@color/soothingBreeze</item>
+        <item>@color/exodusFruit</item>
+        <item>@color/shyMoment</item>
+        <item>@color/electronBlue</item>
+        <item>@color/greenDarnerTail</item>
+        <item>@color/jadeDust</item>
+        <item>@color/lightGreenishBlue</item>
+        <item>@color/aquaVelvet</item>
+        <item>@color/pico8Pink</item>
+        <item>@color/prunusAvium</item>
+        <item>@color/chiGong</item>
+        <item>@color/pinkGlamour</item>
+        <item>@color/orangeville</item>
+        <item>@color/doubleDragonSkin</item>
+        <item>@color/casandoraYellow</item>
+    </integer-array>
+
+    <string-array name="colorName">
+        <item>Fuel Town</item>
+        <item>Soothing Breeze</item>
+        <item>Exodus Fruit</item>
+        <item>Shy Moment</item>
+        <item>Electron Blue</item>
+        <item>Default Color</item>
+        <item>Jade Dust</item>
+        <item>Light Greenish Blue</item>
+        <item>Aqua Velvet</item>
+        <item>Pico-8 Pink</item>
+        <item>Prunus Avium</item>
+        <item>Chi-Gong</item>
+        <item>Pink Glamour</item>
+        <item>OrangeVille</item>
+        <item>Double Dragon Skin</item>
+        <item>Casandora Yellow</item>
+    </string-array>
+</resources>

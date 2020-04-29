@@ -46,6 +46,8 @@ public class TaskRepository {
         new DeleteAllTaskAsyncTask(taskDao).execute();
     }
 
+    public LiveData<Integer> getAllProjectTasksCount(int projectID){return taskDao.getAllProjectTasksCount(projectID);}
+
     public LiveData<List<Task>> getAllIncompletedTask() { return allIncompletedTask;}
     public LiveData<List<Task>> getAllTasks(){
         return allTasks;

@@ -1,8 +1,5 @@
 package com.example.todolist.DAO;
 
-import android.provider.LiveFolders;
-
-import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -29,7 +26,10 @@ public interface ProjectDao {
     @Query("DELETE FROM project_table")
     void deleteAllProjects();
 
-    @Query("SELECT * FROM project_table ORDER BY projectID DESC")
+    @Query("SELECT * FROM project_table WHERE projectID <> -1 ORDER BY projectID DESC")
     LiveData<List<Project>> getAllProject();
+
+    @Query("SELECT * FROM project_table WHERE projectID = :projectID")
+    LiveData<Project> getProjectById(int projectID);
 
 }

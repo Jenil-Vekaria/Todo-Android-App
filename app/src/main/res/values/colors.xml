@@ -2,15 +2,30 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">@color/green</color>
+    <color name="colorAccent">@color/lightGreenishBlue</color>
     <color name="colorTitle">#5C5E5E</color>
 
-    <color name="red">#FF7675</color>
-    <color name="blue">#74B9FF</color>
-    <color name="yellow">#FFEAA7</color>
-    <color name="purple">#A29BFE</color>
-    <color name="black">#636E72</color>
-    <color name="green">#55EFC4</color>
-    <color name="orange">#fab1a0</color>
-    <color name="pink">#fd79a8</color>
+
+    <color name="fuelTown">#576574</color>
+    <color name="cityLights">#dfe6e9</color>
+    <color name="soothingBreeze">#b2bec3</color>
+    <color name="exodusFruit">#6c5ce7</color>
+    <color name="shyMoment">#a29bfe</color>
+    <color name="electronBlue">#0984e3</color>
+    <color name="greenDarnerTail">#74b9ff</color>
+    <color name="jadeDust">#00d2d3</color>
+    <color name="lightGreenishBlue">#1dd1a1</color>
+    <color name="aquaVelvet">#01a3a4</color>
+    <color name="pico8Pink">#fd79a8</color>
+    <color name="prunusAvium">#e84393</color>
+    <color name="chiGong">#d63031</color>
+    <color name="pinkGlamour">#ff7675</color>
+    <color name="orangeville">#e17055</color>
+    <color name="doubleDragonSkin">#ff9f43</color>
+    <color name="casandoraYellow">#feca57</color>
+
+
+
+
+
 </resources>

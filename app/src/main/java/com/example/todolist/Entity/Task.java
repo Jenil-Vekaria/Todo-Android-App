@@ -1,13 +1,15 @@
 package com.example.todolist.Entity;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "task_table")
-//foreignKeys = @ForeignKey(entity = Project.class,
-//        parentColumns = "projectID",
-//        childColumns = "projectID",
-//        onDelete = ForeignKey.CASCADE)
+@Entity(tableName = "task_table",
+        foreignKeys = @ForeignKey(entity = Project.class,
+                                parentColumns = "projectID",
+                                childColumns = "projectID",
+                                onDelete = ForeignKey.CASCADE)
+        )
 public class Task {
 
     @PrimaryKey(autoGenerate = true)

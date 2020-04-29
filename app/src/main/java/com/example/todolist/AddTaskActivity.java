@@ -82,7 +82,7 @@ public class AddTaskActivity extends AppCompatActivity implements ColorPicker.Co
         colorDot = findViewById(R.id.dot);
         save = findViewById(R.id.button_save);
 
-        dotColor = getResources().getColor(R.color.blue);
+        dotColor = getResources().getColor(R.color.greenDarnerTail);
         colorName = "Default Color";
     }
 

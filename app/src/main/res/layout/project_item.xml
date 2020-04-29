@@ -8,7 +8,7 @@
     android:layout_marginTop="16dp"
     android:layout_marginRight="20dp"
     android:background="@drawable/round_button"
-    app:cardBackgroundColor="#FF7675"
+    app:cardBackgroundColor="@color/pinkGlamour"
     app:cardCornerRadius="10dp"
     card_view:cardElevation="5dp">
 

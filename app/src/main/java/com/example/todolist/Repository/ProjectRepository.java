@@ -40,6 +40,7 @@ public class ProjectRepository {
     public LiveData<List<Project>> getAllProjects(){
         return allProjects;
     }
+    public LiveData<Project> getProjectById(int projectID) { return projectDao.getProjectById(projectID); }
 
 
     private static class InsertProjectAsync extends AsyncTask<Project,Void,Void>{

@@ -23,13 +23,13 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_notebook" />
+            app:srcCompat="@drawable/ic_no_task" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="No Tasks"
+            android:text="No Completed Tasks"
             android:fontFamily="@font/nunito_semibold"
             android:textSize="18sp"
             />

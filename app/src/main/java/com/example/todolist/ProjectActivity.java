@@ -2,12 +2,14 @@ package com.example.todolist;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -142,12 +144,35 @@ public class ProjectActivity extends AppCompatActivity {
                 Toast.makeText(this,"EDIT PROJECT",Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.delete_project:
+                deleteProject();
                 Toast.makeText(this,"DELETE PROJECT",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;
 
         }
+    }
+
+    private void deleteProject() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to delete this project?")
+        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        })
+        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                todoViewModel.delete(currentProject);
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     private void editProject() {
@@ -191,6 +216,17 @@ public class ProjectActivity extends AppCompatActivity {
 
     }
 
+    private void updateProjectTaskCount(int projectID, int count){
+        for(Project p: allProjects){
+            if(p.getProjectID() == projectID){
+                p.setTotalTasks(count);
+                todoViewModel.update(p);
+                break;
+            }
+        }
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -211,12 +247,20 @@ public class ProjectActivity extends AppCompatActivity {
         }
         else if(requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK){
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
+            final int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
             Task newTask = new Task(projectID,task,color,colorName,false);
             todoViewModel.insert(newTask);
+
+//          If task added to project, update project totalTask count
+            todoViewModel.getAllProjectTaskCount(projectID).observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer integer) {
+                    updateProjectTaskCount(projectID,integer.intValue());
+                }
+            });
 
             Toast.makeText(this,"Task saved",Toast.LENGTH_SHORT).show();
         }

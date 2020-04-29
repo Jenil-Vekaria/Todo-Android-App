@@ -14,6 +14,7 @@ import com.example.todolist.DAO.ProjectDao;
 import com.example.todolist.DAO.TaskDao;
 import com.example.todolist.Entity.Project;
 import com.example.todolist.Entity.Task;
+import com.example.todolist.R;
 
 @Database(entities = {Task.class, Project.class}, version = 1)
 public abstract class TodoDatabase extends RoomDatabase {
@@ -57,13 +58,20 @@ public abstract class TodoDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            taskDao.insert(new Task(-1,"Finish the App design on Adobe XD", Color.parseColor("#FF7675"),"Red",false));
-            taskDao.insert(new Task(-1,"Add the unit testing", Color.parseColor("#74B9FF"),"Green",true));
-            taskDao.insert(new Task(-1,"Create a GitHub repo", Color.parseColor("#55EFC4"),"Blue",true));
 
-            projectDao.insert(new Project("CPS847 Final Project",Color.parseColor("#FF7675"),0,"Red"));
-            projectDao.insert(new Project("CPS616 Assignment 1",Color.parseColor("#74B9FF"),0,"Default Color"));
-            projectDao.insert(new Project("Android Todo List App",Color.parseColor("#55EFC4"),0,"Green"));
+            Project noProject = new Project("",Color.parseColor("#FF7675"),0,"");
+            noProject.setProjectID(-1);
+            projectDao.insert(noProject);
+
+
+            projectDao.insert(new Project("Sample Project No.3",Color.parseColor("#ff9f43"),0,"Double Dragon Skin"));
+            projectDao.insert(new Project("Sample Project No.2",Color.parseColor("#e84393"),0,"Prunus Avium"));
+            projectDao.insert(new Project("Sample Project No.1", Color.parseColor("#6c5ce7"),0,"Exodus Fruit"));
+
+            taskDao.insert(new Task(-1,"CLICK HERE: Edit the task", Color.parseColor("#0984e3"),"Electron Blue",false));
+            taskDao.insert(new Task(-1,"SWIPE LEFT: Delete Task", Color.parseColor("#a29bfe"),"Shy Moment",false));
+            taskDao.insert(new Task(-1,"SWIPE RIGHT: Complete/Incomplete task", Color.parseColor("#feca57"),"Casandora Yellow",false));
+
             return null;
         }
     }

@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity{
 
     public final static int ADD_TASK_REQUEST = 1;
     public final static int ADD_PROJECT_REQUEST = 3;
-    public static final int PROJECT_EDIT_REQUEST = 4;
 
     private TodoViewModel todoViewModel;
     FloatingActionMenu menu;
@@ -85,20 +84,37 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    private void updateProjectTaskCount(int projectID, int count){
+        for(Project p: allProjects){
+            if(p.getProjectID() == projectID){
+                p.setTotalTasks(count);
+                todoViewModel.update(p);
+                break;
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK){
             String task = data.getStringExtra(AddTaskActivity.EXTRA_TASK);
-            int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
+            final int projectID = data.getIntExtra(AddTaskActivity.EXTRA_PROJECTID,-1);
             int color = data.getIntExtra(AddTaskActivity.EXTRA_COLOR, Color.parseColor("#74B9FF"));
             String colorName = data.getStringExtra(AddTaskActivity.EXTRA_COLOR_NAME);
 
             Task newTask = new Task(projectID,task,color,colorName,false);
             todoViewModel.insert(newTask);
 
-            Toast.makeText(this,"Task saved",Toast.LENGTH_SHORT).show();
+//          If task added to project, update project totalTask count
+            todoViewModel.getAllProjectTaskCount(projectID).observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer integer) {
+                    updateProjectTaskCount(projectID,integer.intValue());
+                }
+            });
+
         }
         else if(requestCode == ADD_PROJECT_REQUEST && resultCode == RESULT_OK){
             String projectName = data.getStringExtra(AddProjectActivity.EXTRA_NAME);
@@ -107,6 +123,7 @@ public class MainActivity extends AppCompatActivity{
             int totalTask = 0;
 
             Project newProject = new Project(projectName,colorCode,totalTask,colorName);
+            todoViewModel.getAllProjectTaskCount(newProject.getProjectID());
             todoViewModel.insert(newProject);
             Toast.makeText(this,"Project saved",Toast.LENGTH_SHORT).show();
         }
@@ -129,6 +146,7 @@ public class MainActivity extends AppCompatActivity{
                 allProjects = projects;
             }
         });
+
 
         projectAdapter.setOnProjectClickListener(new ProjectAdapter.OnProjectClickListener() {
             @Override
